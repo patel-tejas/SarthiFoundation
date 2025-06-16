@@ -24,7 +24,7 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          red: "#E63946",
+          red: "#EF4444",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -37,7 +37,7 @@ const config: Config = {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
-          yellow: "#FFD166",
+          yellow: "#FBBF24",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -64,7 +64,7 @@ const config: Config = {
           ring: "hsl(var(--sidebar-ring))",
         },
         dark: {
-          green: "#2D6A4F",
+          green: "#059669",
         },
       },
       borderRadius: {

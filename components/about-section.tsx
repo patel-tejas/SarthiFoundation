@@ -11,9 +11,10 @@ export default function AboutSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   const features = [
-    "The standard chunk of charity used since.",
-    "Randomised which don't look even slightly believable.",
-    "Making this the first true generator on the Internet.",
+    "Regular food distribution in slum areas across the city",
+    "Monthly grocery kits for widows and elderly women",
+    "Seasonal support including blankets in winter and buttermilk in summer",
+    "Educational support through notebooks and stationery for children",
   ]
 
   return (
@@ -29,22 +30,35 @@ export default function AboutSection() {
             transition={{ duration: 0.8 }}
           >
             <div className="grid grid-cols-2 gap-6">
-              {/* Main large image */}
+              {/* Main large video */}
               <motion.div
-                className="col-span-2 relative h-[400px] rounded-3xl overflow-hidden shadow-xl interactive-image"
+                className="col-span-2 relative h-[400px] rounded-3xl overflow-hidden shadow-xl interactive-image group"
                 whileHover={{ scale: 1.02, y: -5 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image
-                  src="/images/about-children.png"
-                  alt="Children playing and learning together"
-                  fill
-                  className="object-cover"
+                <iframe
+                  src="https://www.youtube.com/embed/fQfLA-zZQIA?si=_4kBiJvkHbXXuGZN&start=6&mute=1&enablejsapi=1&rel=0&modestbranding=1"
+                  title="Sarthi Foundation - Community Service Video"
+                  className="w-full h-full object-cover"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  onMouseEnter={(e) => {
+                    const iframe = e.target as HTMLIFrameElement
+                    const src = iframe.src
+                    if (!src.includes("autoplay=1")) {
+                      iframe.src = src.replace("mute=1", "mute=1&autoplay=1")
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    const iframe = e.target as HTMLIFrameElement
+                    const src = iframe.src
+                    iframe.src = src.replace("&autoplay=1", "&mute=0")
+                  }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-red/20 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <p className="font-semibold text-xl">Building Communities</p>
-                  <p className="text-sm opacity-90">Together we grow stronger</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-red/20 to-transparent pointer-events-none"></div>
+                <div className="absolute bottom-6 left-6 text-white pointer-events-none">
+                  <p className="font-semibold text-xl">Sarthi Foundation</p>
+                  <p className="text-sm opacity-90">Watch Our Impact Story</p>
                 </div>
               </motion.div>
 
@@ -54,7 +68,12 @@ export default function AboutSection() {
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image src="/images/charity-work.png" alt="Charity work in action" fill className="object-cover" />
+                <Image
+                  src="/images/cm-visit.jpeg"
+                  alt="Community leaders and officials with Sarthi Foundation team"
+                  fill
+                  className="object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-primary-red/30 to-transparent"></div>
               </motion.div>
 
@@ -63,7 +82,12 @@ export default function AboutSection() {
                 whileHover={{ scale: 1.05, rotate: -1 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image src="/images/education-boy.png" alt="Education program" fill className="object-cover" />
+                <Image
+                  src="/images/food-distribution-street.jpeg"
+                  alt="Volunteer distributing food to families on the street"
+                  fill
+                  className="object-cover"
+                />
                 <div className="absolute inset-0 bg-gradient-to-t from-accent-yellow/30 to-transparent"></div>
               </motion.div>
             </div>
@@ -81,14 +105,14 @@ export default function AboutSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <p className="text-primary-red font-semibold text-lg mb-4 tracking-wide">ABOUT US</p>
+              <p className="text-primary-red font-semibold text-lg mb-4 tracking-wide">ABOUT SARTHI FOUNDATION</p>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-                You Can Help a Lot by Donating Little for <span className="gradient-text">Charity</span>
+                Bringing Hope Through <span className="gradient-text">Community Service</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                We are a fast growing and innovative organization dedicated to making a difference in communities
-                worldwide. Our experienced team is made up of passionate individuals committed to creating lasting
-                positive change through education, healthcare, and community development programs.
+                Since 2000 Sarthi Foundation is dedicated to serving underprivileged communities through comprehensive support
+                programs. We focus on addressing basic needs like food security, supporting vulnerable groups like
+                widows, and providing seasonal assistance to ensure dignity and comfort for all.
               </p>
             </motion.div>
 
@@ -127,7 +151,7 @@ export default function AboutSection() {
                 whileTap={{ scale: 0.95 }}
               >
                 <ArrowRight className="h-5 w-5" />
-                Donate Now
+                Support Our Mission
               </motion.button>
             </motion.div>
           </motion.div>

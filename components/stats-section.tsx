@@ -46,14 +46,14 @@ function StatItem({ number, label, delay }: StatItemProps) {
 
 export default function StatsSection() {
   const stats = [
-    { number: "$500K", label: "People We Helped In 2021" },
-    { number: "300+", label: "Volunteers In 2021" },
-    { number: "1,200+", label: "Funds Campaign" },
-    { number: "$80M", label: "Funds We Collected" },
+    { number: "5000+", label: "Families Fed Monthly" },
+    { number: "500+", label: "Widows Supported" },
+    { number: "20+", label: "Slum Areas Covered" },
+    { number: "₹2L+", label: "Monthly Food Distribution" },
   ]
 
   return (
-    <section className="bg-dark-green section-padding">
+    <section className="bg-red-600 section-padding">
       <div className="container-max">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, index) => (

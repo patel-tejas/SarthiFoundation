@@ -4,13 +4,14 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 export default function CallToActionSection() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="section-padding bg-dark-green text-white">
+    <section className="section-padding bg-red-600 text-white">
       <div className="container-max">
         <motion.div
           ref={ref}
@@ -25,7 +26,7 @@ export default function CallToActionSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Let's Help Other With <span className="text-accent-yellow">Your Charity</span>
+            Join Us in <span className="text-yellow-300">Feeding the Hungry</span>
           </motion.h2>
 
           <motion.p
@@ -34,8 +35,8 @@ export default function CallToActionSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            The artist Christo, known for wrapping buildings including Berlin's Reichstag, and also swathing areas of
-            coast and entire islands in fabric, has died aged 84.
+            Your support helps us continue our mission of food distribution in slum areas, supporting widows with
+            grocery kits, and providing seasonal assistance to those who need it most.
           </motion.p>
 
           <motion.div
@@ -43,14 +44,16 @@ export default function CallToActionSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.6 }}
           >
-            <motion.button
-              className="border-2 border-white text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-dark-green transition-all duration-200 inline-flex items-center gap-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <ArrowRight className="h-5 w-5" />
-              Donate Now
-            </motion.button>
+            <Link href="/donate">
+              <motion.button
+                className="border-2 border-white text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-red-600 transition-all duration-200 inline-flex items-center gap-2"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowRight className="h-5 w-5" />
+                Donate Now
+              </motion.button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

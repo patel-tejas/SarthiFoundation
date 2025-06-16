@@ -1,13 +1,13 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin, Youtube } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white pt-20 pb-10">
-      <div className="container-max py-20">
+    <footer className="bg-gray-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo and Description */}
           <motion.div
@@ -18,17 +18,18 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <Link href="/" className="flex items-center space-x-3">
-              <span className="text-3xl font-bold">Sarthi Foundation</span>
+              <span className="text-3xl font-bold hover:text-accent-yellow transition-colors duration-200">
+                Sarthi Foundation
+              </span>
             </Link>
             <p className="text-gray-400 leading-relaxed text-lg">
               Making a difference in communities worldwide through compassion, dedication, and your generous support.
             </p>
             <div className="flex space-x-4">
               {[
-                { icon: Facebook, href: "#" },
-                { icon: Twitter, href: "#" },
-                { icon: Instagram, href: "#" },
-                { icon: Linkedin, href: "#" },
+                { icon: Facebook, href: "https://www.facebook.com/SarthiFoundation2001" },
+                { icon: Youtube, href: "http://www.youtube.com/@sarthifoundation.official9463" },
+                { icon: Instagram, href: "https://www.instagram.com/sarthi_foundation_official?r=nametag" },
               ].map((social, index) => (
                 <motion.a
                   key={index}
@@ -50,14 +51,16 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold mb-6">Quick Links</h3>
+            <h3 className="text-xl font-bold mb-6 hover:text-accent-yellow transition-colors duration-200">
+              Quick Links
+            </h3>
             <ul className="space-y-4">
               {[
-                { href: "/", label: "Home" },
-                { href: "/about", label: "About Us" },
-                { href: "/programs", label: "Our Programs" },
-                { href: "/gallery", label: "Gallery" },
-                { href: "/contact", label: "Contact" },
+                { href: "/", label: "Home"},
+                { href: "/about", label: "About Us"},
+                { href: "/#our-sevas", label: "Our Sevas"},
+                { href: "/csr-partnerships", label: "CSR"},
+                { href: "/contact", label: "Contact"},
               ].map((link, index) => (
                 <li key={index}>
                   <Link
@@ -78,19 +81,27 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold mb-6">Our Programs</h3>
+            <Link href="/#our-sevas">
+              <h3 className="text-xl font-bold mb-6 hover:text-accent-yellow transition-colors duration-200 cursor-pointer">
+                Our Sevas
+              </h3>
+            </Link>
             <ul className="space-y-4">
               {[
-                "Educational Bursaries",
-                "Income Generation",
-                "Healthcare Access",
-                "Clean Water Projects",
-                "Community Development",
-              ].map((program, index) => (
+                { href: "/media/daily-food-distribution", label: "Daily Food Distribution" },
+                { href: "/media/winter-blanket-drive", label: "Winter Blanket Drive" },
+                { href: "/media/summer-buttermilk-program", label: "Summer Buttermilk Program" },
+                { href: "/media/festival-sweet-distribution", label: "Festival Sweet Distribution" },
+                { href: "/media/educational-support", label: "Educational Support" },
+                { href: "/media/widow-support-program", label: "Widow Support Program" },
+              ].map((seva, index) => (
                 <li key={index}>
-                  <a href="#" className="text-gray-400 hover:text-accent-yellow transition-colors duration-200 text-lg">
-                    {program}
-                  </a>
+                  <Link
+                    href={seva.href}
+                    className="text-gray-400 hover:text-accent-yellow transition-colors duration-200 text-lg"
+                  >
+                    {seva.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -103,13 +114,16 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold mb-6">Contact Us</h3>
+            <h3 className="text-xl font-bold mb-6 hover:text-accent-yellow transition-colors duration-200">
+              Contact Us
+            </h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <MapPin className="h-6 w-6 text-primary-red flex-shrink-0 mt-1" />
                 <div>
-                  <p className="text-gray-400 text-lg">123 Charity Lane</p>
-                  <p className="text-gray-400 text-lg">New York, NY 10001</p>
+                  <p className="text-gray-400 text-lg hover:text-accent-yellow transition-colors duration-200">
+                    09, Shayona Green, S.G.Highway, New Gota, Ahmedabad, Gujarat 382481
+                  </p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
@@ -118,16 +132,16 @@ export default function Footer() {
                   href="mailto:info@orphange.org"
                   className="text-gray-400 hover:text-accent-yellow transition-colors duration-200 text-lg"
                 >
-                  info@orphange.org
+                  info@sathifoundation.org
                 </a>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-6 w-6 text-primary-red flex-shrink-0" />
                 <a
-                  href="tel:+1234567890"
+                  href="tel:+919825433151"
                   className="text-gray-400 hover:text-accent-yellow transition-colors duration-200 text-lg"
                 >
-                  (123) 456-7890
+                  +91 98254 33151
                 </a>
               </div>
             </div>
@@ -141,7 +155,7 @@ export default function Footer() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-400 text-lg">
+          <p className="text-gray-400 text-lg hover:text-accent-yellow transition-colors duration-200">
             &copy; {new Date().getFullYear()} Orphange. All rights reserved. Built with ❤️ for a better world.
           </p>
         </motion.div>

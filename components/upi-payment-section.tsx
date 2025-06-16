@@ -13,7 +13,7 @@ export default function UpiPaymentSection() {
   const [copiedUpi, setCopiedUpi] = useState(false)
   const [selectedAmount, setSelectedAmount] = useState("100")
 
-  const upiId = "orphange@paytm"
+  const upiId = "8401908905-1@okbizaxis"
   const predefinedAmounts = ["50", "100", "250", "500", "1000"]
 
   const copyUpiId = async () => {
@@ -95,11 +95,11 @@ export default function UpiPaymentSection() {
               >
                 <div className="w-48 h-48 mx-auto bg-white rounded-xl shadow-inner flex items-center justify-center">
                   <Image
-                    src="/placeholder.svg?height=200&width=200"
-                    alt="UPI QR Code"
-                    width={200}
-                    height={200}
-                    className="rounded-lg"
+                    src="/images/sarthi-upi-qr.png"
+                    alt="Sarthi Foundation UPI QR Code"
+                    width={300}
+                    height={400}
+                    className="w-full h-auto rounded-lg"
                   />
                 </div>
               </motion.div>
@@ -251,6 +251,7 @@ export default function UpiPaymentSection() {
                 ))}
               </div>
             </motion.div>
+            <p className="text-center text-gray-500">Contact us: +91 98790 90111</p>
           </motion.div>
         </div>
       </div>

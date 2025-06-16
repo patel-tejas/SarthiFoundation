@@ -1,15 +1,19 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X } from "lucide-react"
 import Image from "next/image"
-import logo from "@/public/images/sarthi_logo.png"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, ChevronDown } from "lucide-react"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [showMediaDropdown, setShowMediaDropdown] = useState(false)
+
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,53 +23,132 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  // Handle scrolling to section after navigation
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash && pathname === "/") {
+      const sectionId = hash.substring(1)
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }, 300)
+    }
+  }, [pathname])
+
+  const mediaItems = [
+   
+    { href: "/media/covid-relief-services", label: "COVID-19 Relief Services" },
+    { href: "/media/newspaper-articles", label: "Newspaper Articles" },
+  ]
+
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/about", label: "About Us" },
-    { href: "/programs", label: "Our Programs" },
-    { href: "/teams", label: "Teams" },
-    { href: "/volunteer", label: "Become a Volunteer" },
+    { href: "/#our-sevas", label: "Our Sevas" },
+    { href: "/csr-partnerships", label: "CSR" },
     { href: "/contact", label: "Contact" },
   ]
 
+  const handleNavClick = (href: string) => {
+    if (href.startsWith("/#")) {
+      const sectionId = href.substring(2)
+
+      // If we're already on the home page, just scroll
+      if (pathname === "/") {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      } else {
+        // Navigate to home with hash - fix the URL construction
+        router.push(href) // This will be "/#our-sevas"
+      }
+    }
+  }
+
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-2 border-gray-100 ${
-        isScrolled ? "bg-white shadow-lg" : "bg-white/95 backdrop-blur-sm"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white shadow-lg" : "bg-white"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container mx-auto px-4 h-[70px] md:h-[80px]">
-        <div className="flex items-center justify-between h-full">
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src={logo}
-              alt="Sarthi Foundation Logo"
-              width={80}
-              height={80}
-              className="h-10 w-10 md:h-12 md:w-12"
-            />
-            <span className="text-[18px] md:text-xl font-bold text-gray-900">Sarthi Foundation</span>
+      <div className="container-max">
+        <div className="flex items-center justify-between py-4">
+          <Link href="/" className="flex items-center space-x-3">
+            <div className="w-12 h-12 rounded-lg overflow-hidden">
+              <Image
+                src="/images/logo.jpg"
+                alt="Sarthi Foundation Logo"
+                width={48}
+                height={48}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="text-2xl font-bold text-gray-900">Sarthi Foundation</span>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6">
+          <nav className="hidden lg:flex items-center space-x-8">
             {navItems.map((item) => (
-              <Link
+              <button
                 key={item.href}
-                href={item.href}
-                className="text-gray-700 hover:text-primary-red transition-colors duration-200 font-medium text-[15px]"
+                onClick={() => {
+                  if (item.href.startsWith("/#")) {
+                    handleNavClick(item.href)
+                  } else {
+                    router.push(item.href)
+                  }
+                }}
+                className="text-gray-700 hover:text-red-500 transition-colors duration-200 font-medium"
               >
                 {item.label}
-              </Link>
+              </button>
             ))}
-            <Link
-              href="/volunteer"
-              className="bg-accent-yellow text-gray-900 px-5 py-2 rounded-md font-semibold hover:bg-yellow-400 transition-colors duration-200 text-sm"
+
+            {/* Media Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setShowMediaDropdown(true)}
+              onMouseLeave={() => setShowMediaDropdown(false)}
             >
-              VOLUNTEER
+              <button className="flex items-center text-gray-700 hover:text-red-500 transition-colors duration-200 font-medium">
+                Media
+                <ChevronDown className="h-4 w-4 ml-1" />
+              </button>
+
+              <AnimatePresence>
+                {showMediaDropdown && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border border-gray-100 py-2"
+                  >
+                    {mediaItems.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="block px-4 py-3 text-gray-700 hover:bg-red-50 hover:text-red-500 transition-colors duration-200"
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            <Link
+              href="/donate"
+              className="bg-red-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-600 transition-colors duration-200"
+            >
+              DONATE NOW
             </Link>
           </nav>
 
@@ -84,26 +167,46 @@ export default function Header() {
               exit={{ opacity: 0, height: 0 }}
               className="lg:hidden border-t border-gray-200"
             >
-              <div className="py-4 space-y-4 px-4">
+              <div className="py-4 space-y-4">
                 {navItems.map((item) => (
-                  <Link
+                  <button
                     key={item.href}
-                    href={item.href}
-                    className="block text-gray-700 hover:text-primary-red transition-colors duration-200 font-medium py-2"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setIsOpen(false)
+                      if (item.href.startsWith("/#")) {
+                        handleNavClick(item.href)
+                      } else {
+                        router.push(item.href)
+                      }
+                    }}
+                    className="block w-full text-left text-gray-700 hover:text-red-500 transition-colors duration-200 font-medium"
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 ))}
-                <div className="pt-2">
-                  <Link
-                    href="/volunteer"
-                    className="inline-block bg-accent-yellow text-gray-900 px-6 py-2 rounded-md font-semibold hover:bg-yellow-400 transition-colors duration-200 text-sm"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    VOLUNTEER
-                  </Link>
+
+                {/* Mobile Media Menu */}
+                <div className="space-y-2">
+                  <p className="text-gray-900 font-semibold">Media</p>
+                  {mediaItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="block pl-4 text-gray-600 hover:text-red-500 transition-colors duration-200"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
                 </div>
+
+                <Link
+                  href="/donate"
+                  className="inline-block bg-red-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-600 transition-colors duration-200"
+                  onClick={() => setIsOpen(false)}
+                >
+                  DONATE NOW
+                </Link>
               </div>
             </motion.nav>
           )}

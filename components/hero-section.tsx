@@ -1,10 +1,10 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
-import { ArrowRight, Users, Heart } from "lucide-react"
+import { ArrowRight, Heart, ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
-import heroImg from "@/public/images/heroImg.jpg"
+import Link from "next/link"
 
 interface AnimatedNumberProps {
   target: number
@@ -13,26 +13,152 @@ interface AnimatedNumberProps {
   prefix?: string
 }
 
+function ImageCarousel() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+
+  const images = [
+    {
+      src: "/images/food-distribution-slum.jpg",
+      alt: "Food distribution in slum areas with Sarthi Foundation van",
+    },
+    {
+      src: "/images/children-eating-line.jpg",
+      alt: "Children and families eating meals during food distribution",
+    },
+    {
+      src: "/images/child-eating-closeup.jpg",
+      alt: "Happy child enjoying nutritious meal",
+    },
+    {
+      src: "/images/large-food-distribution.jpg",
+      alt: "Large scale organized food distribution event",
+    },
+    {
+      src: "/images/group-photo-children.jpg",
+      alt: "Group photo with children and Sarthi Foundation team",
+    },
+    {
+      src: "/images/buttermilk-distribution.jpg",
+      alt: "Summer buttermilk distribution program in slum area",
+    },
+    // {
+    //   src: "/images/hero-children.png",
+    //   alt: "Children receiving care and support",
+    // },
+    // {
+    //   src: "/images/charity-work.png",
+    //   alt: "Community service work",
+    // },
+  ]
+
+  // Auto-rotate images every 4 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? 0 : prevIndex + 1))
+    }, 4000)
+
+    return () => clearInterval(timer)
+  }, [images.length])
+
+  const nextImage = () => {
+    setCurrentIndex(currentIndex === images.length - 1 ? 0 : currentIndex + 1)
+  }
+
+  const prevImage = () => {
+    setCurrentIndex(currentIndex === 0 ? images.length - 1 : currentIndex - 1)
+  }
+
+  return (
+    <div className="relative w-full h-full">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={images[currentIndex].src || "/placeholder.svg"}
+            alt={images[currentIndex].alt}
+            fill
+            className="object-cover"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={prevImage}
+        className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-white/30 backdrop-blur-sm text-white rounded-full hover:bg-white/50 transition-all duration-200 shadow-md z-10"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      <button
+        onClick={nextImage}
+        className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-white/30 backdrop-blur-sm text-white rounded-full hover:bg-white/50 transition-all duration-200 shadow-md z-10"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full transition-all duration-200 ${
+              index === currentIndex ? "bg-white scale-125" : "bg-white/50 hover:bg-white/75"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// Update the AnimatedNumber component to handle string formats like "5k+"
 function AnimatedNumber({ target, duration = 2000, suffix = "", prefix = "" }: AnimatedNumberProps) {
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
-    const increment = target / (duration / 16)
-    const timer = setInterval(() => {
-      setCurrent((prev) => {
-        if (prev + increment >= target) {
-          clearInterval(timer)
-          return target
-        }
-        return prev + increment
-      })
-    }, 16)
+    // For small numbers, animate normally
+    if (target <= 1000) {
+      const increment = target / (duration / 16)
+      const timer = setInterval(() => {
+        setCurrent((prev) => {
+          if (prev + increment >= target) {
+            clearInterval(timer)
+            return target
+          }
+          return prev + increment
+        })
+      }, 16)
+      return () => clearInterval(timer)
+    }
+    // For large numbers, use fewer animation steps to reduce jank
+    else {
+      const steps = 20
+      const increment = target / steps
+      const stepDuration = duration / steps
+      let step = 0
 
-    return () => clearInterval(timer)
+      const timer = setInterval(() => {
+        setCurrent(increment * step)
+        step++
+        if (step > steps) {
+          clearInterval(timer)
+          setCurrent(target)
+        }
+      }, stepDuration)
+      return () => clearInterval(timer)
+    }
   }, [target, duration])
 
   return (
-    <span className="number-counter">
+    <span className="font-bold text-4xl md:text-5xl text-red-500">
       {prefix}
       {Math.floor(current).toLocaleString()}
       {suffix}
@@ -42,105 +168,108 @@ function AnimatedNumber({ target, duration = 2000, suffix = "", prefix = "" }: A
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-white pt-[70px] pb-12 md:pt-32 md:pb-32 flex items-center">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 mt-10">
+    <section className="bg-white min-h-screen flex items-center pt-20">
+      <div className="container-max">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left Content */}
           <motion.div
-            className="text-center lg:text-left max-w-2xl lg:order-1"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 10 }}
+            className="space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-3xl sm:text-4xl md:text-[2.8rem] lg:text-5xl font-bold leading-tight text-gray-900 mb-4 md:mb-6"
-              initial={{ opacity: 0, y: 10 }}
+              className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
+              transition={{ delay: 0.2, duration: 0.8 }}
             >
-              <span className="text-accent-yellow block">Feed Others</span>
-              <span className="block">Before You Eat</span>
+              <span className="text-gray-900">Feed Others</span>
+              <br />
+              <span className="gradient-text">Before You Eat</span>
             </motion.h1>
 
             <motion.p
-              className="text-base md:text-lg text-gray-700 leading-relaxed mb-6 md:mb-8 max-w-lg mx-auto lg:mx-0"
-              initial={{ opacity: 0, y: 10 }}
+              className="text-xl text-gray-600 leading-relaxed max-w-lg"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Volunteers may or may not have the time, they just possess the heart.
+              Serving communities through food distribution in slum areas, supporting widows with grocery kits, and
+              providing seasonal assistance to those in need.
             </motion.p>
 
             {/* Animated Stats */}
             <motion.div
-              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-6 md:mb-8"
-              initial={{ opacity: 0, y: 10 }}
+              className="grid grid-cols-3 gap-8 py-8"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
             >
-              <div className="text-center min-w-[90px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-primary-red">
-                  <AnimatedNumber target={300} suffix="+" />
+              <div>
+                <div className="mb-2">
+                  <span className="font-bold text-4xl md:text-5xl text-red-500">5k+</span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600">Volunteers</p>
+                <p className="text-gray-600 font-medium">Families Fed</p>
               </div>
-              <div className="text-center min-w-[90px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-primary-red">
-                  <AnimatedNumber target={1200} suffix="+" />
+              <div>
+                <div className="mb-2">
+                  <span className="font-bold text-4xl md:text-5xl text-red-500">500+</span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600">Lives Changed</p>
+                <p className="text-gray-600 font-medium">Widows Supported</p>
               </div>
-              <div className="text-center min-w-[90px]">
-                <div className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 text-primary-red">
-                  <AnimatedNumber target={25} suffix="+" />
+              <div>
+                <div className="mb-2">
+                  <span className="font-bold text-4xl md:text-5xl text-red-500">20+</span>
                 </div>
-                <p className="text-xs sm:text-sm text-gray-600">Countries</p>
+                <p className="text-gray-600 font-medium">Slum Areas</p>
               </div>
             </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
-              initial={{ opacity: 0, y: 10 }}
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
             >
-              <motion.button
-                className="bg-primary-red text-white px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-base flex items-center justify-center gap-1.5 hover:bg-red-700 transition-all duration-200 shadow-lg"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Heart className="h-4 w-4" />
-                Donate Now
-                <ArrowRight className="h-4 w-4" />
-              </motion.button>
+              <Link href="/donate">
+                <motion.button
+                  className="bg-red-500 text-white px-8 py-4 rounded-full font-semibold text-lg flex items-center justify-center gap-2 hover:bg-red-600 transition-all duration-200 shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Heart className="h-5 w-5" />
+                  Donate Now
+                  <ArrowRight className="h-5 w-5" />
+                </motion.button>
+              </Link>
 
-              <motion.button
-                className="border-2 border-accent-yellow text-gray-900 px-5 py-2.5 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-base hover:bg-accent-yellow transition-all duration-200"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Users className="h-4 w-4 inline mr-1.5" />
-                Join Volunteers
-              </motion.button>
+              <Link href="/#our-sevas">
+                <motion.button
+                  className="border-2 border-yellow-400 text-yellow-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-yellow-400 hover:text-gray-900 transition-all duration-200"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Our Sevas
+                </motion.button>
+              </Link>
             </motion.div>
           </motion.div>
 
-          {/* Right Content */}
+          {/* Right Content - Hero Image */}
           <motion.div
-            className="relative w-full max-w-md lg:max-w-lg lg:order-2 mb-6 lg:mb-0"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
+            className="relative"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <div className="relative aspect-square h-[280px] sm:h-[350px] md:h-[400px] bg-gradient-to-br from-primary-red/10 to-accent-yellow/10 rounded-3xl shadow-xl overflow-hidden">
-              <Image
-                src={heroImg}
-                alt="Hero Image"
-                fill
-                className="object-cover rounded-3xl"
-                priority
-              />
-            </div>
+            <motion.div
+              className="relative h-[500px] md:h-[600px] rounded-3xl overflow-hidden shadow-2xl"
+              whileHover={{ y: -10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ImageCarousel />
+            </motion.div>
           </motion.div>
         </div>
       </div>

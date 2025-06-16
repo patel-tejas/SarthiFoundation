@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --primary-red: #e63946;
-  --accent-yellow: #ffd166;
+  --primary-red: #ef4444;
+  --accent-yellow: #fbbf24;
   --light-gray: #f8f9fa;
   --medium-gray: #6c757d;
   --dark-gray: #343a40;
@@ -28,13 +28,13 @@ body {
 }
 
 .section-padding {
-  padding: 120px 0;
+  padding: 60px 0;
 }
 
 .container-max {
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 60px;
 }
 
 @media (max-width: 768px) {

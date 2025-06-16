@@ -5,67 +5,70 @@ import { useInView } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import Link from "next/link"
 
 interface ProgramCardProps {
   title: string
   description: string
   image: string
   index: number
+  href: string
 }
 
-function ProgramCard({ title, description, image, index }: ProgramCardProps) {
+function ProgramCard({ title, description, image, index, href }: ProgramCardProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <motion.div
-      ref={ref}
-      className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-      initial={{ opacity: 0, y: 50 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay: index * 0.2 }}
-      whileHover={{ y: -10 }}
-    >
-      <div className="relative h-64 overflow-hidden">
-        <Image
-          src={image || "/placeholder.svg"}
-          alt={title}
-          fill
-          className="object-cover transition-transform duration-300 hover:scale-110"
-        />
-      </div>
+    <Link href={href}>
+      <motion.div
+        ref={ref}
+        className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: index * 0.2 }}
+        whileHover={{ y: -10 }}
+      >
+        <div className="relative h-64 overflow-hidden">
+          <Image
+            src={image || "/placeholder.svg"}
+            alt={title}
+            fill
+            className="object-cover transition-transform duration-300 hover:scale-110"
+          />
+        </div>
 
-      <div className="p-6">
-        <motion.h3
-          className="text-xl font-bold mb-3 text-gray-900"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
-        >
-          {title}
-        </motion.h3>
+        <div className="p-6">
+          <motion.h3
+            className="text-xl font-bold mb-3 text-gray-900"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
+          >
+            {title}
+          </motion.h3>
 
-        <motion.p
-          className="text-gray-600 mb-4 leading-relaxed"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
-        >
-          {description}
-        </motion.p>
+          <motion.p
+            className="text-gray-600 mb-4 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
+          >
+            {description}
+          </motion.p>
 
-        <motion.a
-          href="#"
-          className="inline-flex items-center gap-2 text-dark-green font-semibold hover:text-primary-red transition-colors duration-200 hover:gap-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
-        >
-          <ArrowRight className="h-4 w-4" />
-          Learn More
-        </motion.a>
-      </div>
-    </motion.div>
+          <motion.div
+            className="inline-flex items-center gap-2 text-red-500 font-semibold hover:text-red-700 transition-colors duration-200 hover:gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
+          >
+            <ArrowRight className="h-4 w-4" />
+            Learn More
+          </motion.div>
+        </div>
+      </motion.div>
+    </Link>
   )
 }
 
@@ -75,27 +78,51 @@ export default function ProgramsSection() {
 
   const programs = [
     {
-      title: "Educational Bursaries",
+      title: "Daily Food Distribution",
       description:
-        "Orphange offers assistance with uniforms, fees, school supplies, counseling, child safety, activities to improve capacity, and help for generating revenue.",
-      image: "/images/education-boy.png",
+        "We distribute fresh, nutritious meals in slum areas daily, ensuring families have access to proper nutrition and no one goes to bed hungry.",
+      image: "/images/food-distribution-slum.jpg",
+      href: "/media/daily-food-distribution",
     },
     {
-      title: "Income Generations",
+      title: "Festival Celebration",
       description:
-        "Orphange offers assistance with uniforms, fees, school supplies, counseling, child safety, activities to improve capacity, and help for generating revenue.",
-      image: "/images/charity-work.png",
+        "During Diwali and other festivals, we distribute sweets and special meals to bring joy and celebration to underprivileged families.",
+      image: "/images/festival-sweet-boxes.jpg",
+      href: "/media/festival-sweet-distribution",
     },
     {
-      title: "Reintegration Programs",
+      title: "Widow Support Program",
       description:
-        "Orphange offers assistance with uniforms, fees, school supplies, counseling, child safety, activities to improve capacity, and help for generating revenue.",
-      image: "/images/hero-children.png",
+        "Monthly grocery kits and essential supplies for widows and elderly women who struggle to meet their basic daily needs.",
+      image: "/images/grocery-kits-widows.jpg",
+      href: "/media/widow-support-program",
+    },
+    {
+      title: "Winter Blanket Drive",
+      description:
+        "During harsh winter months, we distribute warm blankets to homeless individuals and families in slum areas to protect them from cold.",
+      image: "/images/winter-blanket-distribution.jpg",
+      href: "/media/winter-blanket-drive",
+    },
+    {
+      title: "Milk Seva",
+      description:
+        "We provide free milk and buttermilk to people in slum areas and on streets to help them stay nourished and healthy throughout the year.",
+      image: "/images/buttermilk-distribution.jpg",
+      href: "/media/summer-buttermilk-program",
+    },
+    {
+      title: "Educational Support",
+      description:
+        "We provide notebooks, stationery, and educational materials to children in slum areas to support their learning and academic growth.",
+      image: "/images/educational-support-children.jpg",
+      href: "/media/educational-support",
     },
   ]
 
   return (
-    <section className="section-padding bg-white">
+    <section id="our-sevas" className="section-padding bg-white">
       <div className="container-max">
         <motion.div
           ref={ref}
@@ -105,12 +132,12 @@ export default function ProgramsSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.p
-            className="text-dark-green font-semibold text-lg mb-4"
+            className="text-red-500 font-semibold text-lg mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            PROGRAMS THAT MAKE AN IMPACT
+            SEVAS THAT MAKE AN IMPACT
           </motion.p>
 
           <motion.h2
@@ -119,7 +146,7 @@ export default function ProgramsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Our Programs
+            Our Sevas
           </motion.h2>
 
           <motion.p
@@ -128,8 +155,8 @@ export default function ProgramsSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            Today, we're building on the success of our trial to see how large-scale lump-sum cash payments affect
-            refugees.
+            From daily food distribution to seasonal support, our comprehensive programs address the diverse needs of
+            underprivileged communities throughout the year.
           </motion.p>
         </motion.div>
 
@@ -145,14 +172,16 @@ export default function ProgramsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
-          <motion.button
-            className="bg-dark-green text-white px-8 py-4 rounded-md font-semibold hover:bg-green-800 transition-colors duration-200 inline-flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <ArrowRight className="h-5 w-5" />
-            Read More
-          </motion.button>
+          <Link href="/donate">
+            <motion.button
+              className="bg-red-500 text-white px-8 py-4 rounded-md font-semibold hover:bg-red-600 transition-colors duration-200 inline-flex items-center gap-2"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <ArrowRight className="h-5 w-5" />
+              Support All Sevas
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

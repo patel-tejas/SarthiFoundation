@@ -20,24 +20,24 @@ export default function TestimonialsSection() {
 
   const testimonials: Testimonial[] = [
     {
-      name: "Sarah Johnson",
-      location: "Kenya",
+      name: "Sunita Devi",
+      location: "Dharavi Slum, Mumbai",
       quote:
-        "The educational support has transformed our community. Our children now have access to quality education and a brighter future ahead.",
+        "Sarthi Foundation has been a blessing for our family. The daily food distribution ensures my children never go hungry, and the grocery kits help us manage our monthly needs.",
       image: "/placeholder.svg?height=100&width=100",
     },
     {
-      name: "Miguel Rodriguez",
-      location: "Honduras",
+      name: "Kamala Widow",
+      location: "Govandi, Mumbai",
       quote:
-        "Thanks to the income generation program, I was able to start my own business and support my family. This organization truly changes lives.",
+        "As a widow, it was difficult to manage daily expenses. The monthly grocery kits from Sarthi Foundation have given me hope and dignity. I am forever grateful.",
       image: "/placeholder.svg?height=100&width=100",
     },
     {
-      name: "Amara Okafor",
-      location: "Nigeria",
+      name: "Ravi Kumar",
+      location: "Kurla Slum, Mumbai",
       quote:
-        "The healthcare program brought medical care to our remote village. We are forever grateful for the life-saving support we received.",
+        "During winter, the blankets provided by Sarthi Foundation saved my family from the cold. In summer, the buttermilk distribution keeps us healthy and hydrated.",
       image: "/placeholder.svg?height=100&width=100",
     },
   ]
@@ -70,12 +70,12 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.p
-            className="text-dark-green font-semibold text-lg mb-4"
+            className="text-red-500 font-semibold text-lg mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            STORIES OF IMPACT
+            STORIES OF HOPE
           </motion.p>
 
           <motion.h2
@@ -104,7 +104,7 @@ export default function TestimonialsSection() {
                 transition={{ duration: 0.5 }}
                 className="text-center"
               >
-                <Quote className="h-12 w-12 text-accent-yellow mx-auto mb-6" />
+                <Quote className="h-12 w-12 text-yellow-400 mx-auto mb-6" />
 
                 <blockquote className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic">
                   "{testimonials[currentIndex].quote}"
@@ -149,7 +149,7 @@ export default function TestimonialsSection() {
                 key={index}
                 onClick={() => setCurrentIndex(index)}
                 className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                  index === currentIndex ? "bg-primary-red" : "bg-gray-300"
+                  index === currentIndex ? "bg-red-500" : "bg-gray-300"
                 }`}
               />
             ))}
