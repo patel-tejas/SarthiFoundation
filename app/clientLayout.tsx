@@ -32,7 +32,7 @@ export default function ClientLayout({
         <Header />
         <main>{children}</main>
         <Footer />
-        <WhatsAppChat />
+        {/* <WhatsAppChat /> */}
       </body>
     </html>
   )

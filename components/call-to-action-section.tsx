@@ -12,7 +12,7 @@ export default function CallToActionSection() {
 
   return (
     <section className="section-padding bg-red-600 text-white">
-      <div className="container-max">
+      <div className="px-4 lg:container-max">
         <motion.div
           ref={ref}
           className="text-center max-w-4xl mx-auto"
@@ -21,7 +21,7 @@ export default function CallToActionSection() {
           transition={{ duration: 0.8 }}
         >
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -30,7 +30,7 @@ export default function CallToActionSection() {
           </motion.h2>
 
           <motion.p
-            className="text-xl mb-8 opacity-90 leading-relaxed"
+            className="text-base lg:text-xl mb-8 opacity-90 leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -46,12 +46,12 @@ export default function CallToActionSection() {
           >
             <Link href="/donate">
               <motion.button
-                className="border-2 border-white text-white px-8 py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-red-600 transition-all duration-200 inline-flex items-center gap-2"
+                className="border-2 border-white text-white px-6 py-3 lg:px-8 lg:py-4 rounded-md font-semibold text-lg hover:bg-white hover:text-red-600 transition-all duration-200 inline-flex items-center gap-2"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <ArrowRight className="h-5 w-5" />
-                Donate Now
+                <span className="text-sm lg:text-lg">Donate Now</span>
               </motion.button>
             </Link>
           </motion.div>

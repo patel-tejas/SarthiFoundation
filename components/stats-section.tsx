@@ -32,14 +32,14 @@ function StatItem({ number, label, delay }: StatItemProps) {
       transition={{ duration: 0.6, delay: delay * 0.1 }}
     >
       <motion.h3
-        className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+        className="text-3xl md:text-5xl lg:text-6xl font-bold mb-4"
         initial={{ scale: 0 }}
         animate={isInView ? { scale: 1 } : {}}
         transition={{ duration: 0.5, delay: delay * 0.1 + 0.2 }}
       >
         {displayNumber}
       </motion.h3>
-      <p className="text-lg md:text-xl">{label}</p>
+      <p className="md:text-xl">{label}</p>
     </motion.div>
   )
 }
@@ -54,8 +54,8 @@ export default function StatsSection() {
 
   return (
     <section className="bg-red-600 section-padding">
-      <div className="container-max">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+      <div className="md:container-max">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 lg:gap-12">
           {stats.map((stat, index) => (
             <StatItem key={index} number={stat.number} label={stat.label} delay={index} />
           ))}

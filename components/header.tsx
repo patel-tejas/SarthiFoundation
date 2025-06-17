@@ -77,10 +77,10 @@ export default function Header() {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="container-max">
+      <div className="px-2 md:container-max">
         <div className="flex items-center justify-between py-4">
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-lg overflow-hidden">
+            <div className="w-16 md:w-12 md:h-12 rounded-lg overflow-hidden">
               <Image
                 src="/images/logo.jpg"
                 alt="Sarthi Foundation Logo"
@@ -89,7 +89,7 @@ export default function Header() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <span className="text-2xl font-bold text-gray-900">Sarthi Foundation</span>
+            <span className="text-lg md:text-2xl font-bold text-gray-900">Sarthi Foundation</span>
           </Link>
 
           {/* Desktop Navigation */}

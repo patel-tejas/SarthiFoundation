@@ -47,7 +47,7 @@ export default function CSRPartnershipsPage() {
   ]
 
   const impactStats = [
-    { number: "50+", label: "Corporate Partners" },
+    { number: "5+", label: "Corporate Partners" },
     { number: "₹2Cr+", label: "CSR Funds Utilized" },
     { number: "10K+", label: "Lives Impacted" },
     { number: "100%", label: "Transparency" },

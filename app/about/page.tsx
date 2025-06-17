@@ -4,7 +4,8 @@ import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
 import Image from "next/image"
-import { Heart, Users, Target, Award, Mail, Phone, Linkedin, Star } from "lucide-react"
+import { Heart, Users, Target, Award, Mail, Phone, Linkedin, Star, Facebook } from "lucide-react"
+import Link from "next/link"
 
 export default function AboutPage() {
   const ref = useRef(null)
@@ -326,21 +327,21 @@ export default function AboutPage() {
                   <div className="space-y-3">
                     <div className="flex items-center text-gray-600">
                       <Mail className="h-4 w-4 mr-3 text-red-500" />
-                      <a href={`mailto:${member.email}`} className="hover:text-red-500 transition-colors">
-                        {member.email}
-                      </a>
+                      <Link href={`mailto:rajeshsolanki1978.rs@gmail.com`} className="hover:text-red-500 transition-colors">
+                        rajeshsolanki1978.rs@gmail.com
+                      </Link>
                     </div>
                     <div className="flex items-center text-gray-600">
                       <Phone className="h-4 w-4 mr-3 text-red-500" />
-                      <a href={`tel:${member.phone}`} className="hover:text-red-500 transition-colors">
-                        {member.phone}
+                      <a href={`tel:+919825433151`} className="hover:text-red-500 transition-colors">
+                        +91 9825433151
                       </a>
                     </div>
                     <div className="flex items-center text-gray-600">
-                      <Linkedin className="h-4 w-4 mr-3 text-red-500" />
-                      <a href={member.linkedin} className="hover:text-red-500 transition-colors">
-                        Connect on LinkedIn
-                      </a>
+                      <Facebook className="h-4 w-4 mr-3 text-red-500" />
+                      <Link href={"https://www.facebook.com/share/1AVadKkSM7/"} className="hover:text-red-500 transition-colors">
+                        Connect on Facebook
+                      </Link>
                     </div>
                   </div>
                 </div>

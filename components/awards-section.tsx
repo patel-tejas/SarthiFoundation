@@ -12,7 +12,7 @@ export default function AwardsSection() {
 
   return (
     <section className="section-padding bg-gray-50">
-      <div className="container-max">
+      <div className="px-4 lg:container-max">
         <motion.div
           ref={ref}
           className="text-center mb-16"
@@ -26,8 +26,8 @@ export default function AwardsSection() {
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center">
-              <Award className="h-8 w-8 text-yellow-500" />
+            <div className="w-10 h-10 lg:w-16 lg:h-16 bg-yellow-100 rounded-full flex items-center justify-center">
+              <Award className="h-6 w-6 lg:h-8 lg:w-8 text-yellow-500" />
             </div>
           </motion.div>
 
@@ -41,7 +41,7 @@ export default function AwardsSection() {
           </motion.p>
 
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -50,7 +50,7 @@ export default function AwardsSection() {
           </motion.h2>
 
           <motion.p
-            className="text-gray-600 text-lg max-w-3xl mx-auto"
+            className="text-gray-600 text-sm lg:text-lg max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
@@ -85,13 +85,13 @@ export default function AwardsSection() {
 
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
                   <Award className="h-6 w-6 text-green-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Times CSR Awards</h3>
+                <h3 className="text-[16px] lg:text-xl font-bold text-gray-900">Times CSR Awards</h3>
               </div>
 
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-sm lg:text-base">
                 Felicitated by Times Group for outstanding contribution towards society in the field of "Providing food
                 to the needy people" at the Times CSR Awards 2021 Gujarat.
               </p>
@@ -131,13 +131,13 @@ export default function AwardsSection() {
 
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
-                  <Award className="h-6 w-6 text-red-600" />
+                <div className="w-12 h-10 lg:w-12 lg:h-12 bg-red-100 rounded-full flex items-center justify-center mr-4">
+                  <Award className="h-5 w-5 lg:h-6 lg:w-6 text-red-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">BounceBack Bharat Awards</h3>
+                <h3 className="text-[16px] lg:text-xl font-bold text-gray-900">BounceBack Bharat Awards</h3>
               </div>
 
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-sm lg:text-base">
                 Recognized for exceptional resilience and community service during challenging times by FM 95 Radio One
                 at the prestigious BounceBack Bharat Awards.
               </p>
@@ -177,13 +177,13 @@ export default function AwardsSection() {
 
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
-                  <Award className="h-6 w-6 text-blue-600" />
+                <div className="w-11 h-10 lg:w-12 lg:h-12 bg-blue-100 rounded-full flex items-center justify-center mr-2">
+                  <Award className="h-5 w-5 lg:h-6 lg:w-6 text-blue-600" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900">Akshaya Patra Certificate</h3>
+                <h3 className="font-bold text-gray-900 text-[16px] lg:text-xl">Akshaya Patra Certificate</h3>
               </div>
 
-              <p className="text-gray-600 mb-4">
+              <p className="text-gray-600 mb-4 text-sm lg:text-base">
                 Certificate of Gratitude from Akshaya Patra Foundation for generous contribution in supporting
                 Government school children through the Mid-Day Meal programme in Gujarat.
               </p>

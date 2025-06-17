@@ -61,7 +61,7 @@ export default function TestimonialsSection() {
 
   return (
     <section className="section-padding bg-white">
-      <div className="container-max">
+      <div className="px-4 lg:container-max">
         <motion.div
           ref={ref}
           className="text-center mb-16"
@@ -79,7 +79,7 @@ export default function TestimonialsSection() {
           </motion.p>
 
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -94,7 +94,7 @@ export default function TestimonialsSection() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="relative overflow-hidden rounded-lg bg-gray-50 p-8 md:p-12">
+          <div className="relative overflow-hidden rounded-lg bg-gray-50 p-4 md:p-12">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -104,14 +104,14 @@ export default function TestimonialsSection() {
                 transition={{ duration: 0.5 }}
                 className="text-center"
               >
-                <Quote className="h-12 w-12 text-yellow-400 mx-auto mb-6" />
+                <Quote className="h-5 w-5 lg:h-12 lg:w-12 text-yellow-400 mx-auto mb-6" />
 
-                <blockquote className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed italic">
+                <blockquote className="text-sm lg:text-2xl text-gray-700 mb-8 leading-relaxed italic">
                   "{testimonials[currentIndex].quote}"
                 </blockquote>
 
                 <div className="flex items-center justify-center space-x-4">
-                  <div className="w-16 h-16 rounded-full overflow-hidden">
+                  <div className="w-11 h-11 lg:w-16 lg:h-16 rounded-full overflow-hidden">
                     <img
                       src={testimonials[currentIndex].image || "/placeholder.svg"}
                       alt={testimonials[currentIndex].name}
@@ -119,8 +119,8 @@ export default function TestimonialsSection() {
                     />
                   </div>
                   <div className="text-left">
-                    <h4 className="font-bold text-lg text-gray-900">{testimonials[currentIndex].name}</h4>
-                    <p className="text-gray-600">{testimonials[currentIndex].location}</p>
+                    <h4 className="font-bold text-sm lg:text-lg text-gray-900">{testimonials[currentIndex].name}</h4>
+                    <p className="text-gray-600 text-sm lg:text-base">{testimonials[currentIndex].location}</p>
                   </div>
                 </div>
               </motion.div>
@@ -129,16 +129,16 @@ export default function TestimonialsSection() {
             {/* Navigation Buttons */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors duration-200"
+              className="absolute hidden md:inline left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors duration-200"
             >
-              <ChevronLeft className="h-6 w-6 text-gray-600" />
+              <ChevronLeft className="lg:h-6 lg:w-6 text-gray-600" />
             </button>
 
             <button
               onClick={nextTestimonial}
-              className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors duration-200"
+              className="absolute hidden md:inline right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-colors duration-200"
             >
-              <ChevronRight className="h-6 w-6 text-gray-600" />
+              <ChevronRight className="h-4 w-4 lg:h-6 lg:w-6 text-gray-600" />
             </button>
           </div>
 

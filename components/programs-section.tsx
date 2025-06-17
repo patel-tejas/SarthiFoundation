@@ -20,7 +20,7 @@ function ProgramCard({ title, description, image, index, href }: ProgramCardProp
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <Link href={href}>
+    <Link href={href} className="rounded-lg">
       <motion.div
         ref={ref}
         className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
@@ -29,7 +29,7 @@ function ProgramCard({ title, description, image, index, href }: ProgramCardProp
         transition={{ duration: 0.6, delay: index * 0.2 }}
         whileHover={{ y: -10 }}
       >
-        <div className="relative h-64 overflow-hidden">
+        <div className="relative h-52 lg:h-64 overflow-hidden rounded-lg">
           <Image
             src={image || "/placeholder.svg"}
             alt={title}
@@ -38,9 +38,9 @@ function ProgramCard({ title, description, image, index, href }: ProgramCardProp
           />
         </div>
 
-        <div className="p-6">
+        <div className="p-6 rounded-lg">
           <motion.h3
-            className="text-xl font-bold mb-3 text-gray-900"
+            className="text-lg lg:text-xl font-bold mb-3 text-gray-900"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.2 + 0.2 }}
@@ -49,7 +49,7 @@ function ProgramCard({ title, description, image, index, href }: ProgramCardProp
           </motion.h3>
 
           <motion.p
-            className="text-gray-600 mb-4 leading-relaxed"
+            className="text-gray-600 mb-4 text-sm leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: index * 0.2 + 0.3 }}
@@ -64,7 +64,7 @@ function ProgramCard({ title, description, image, index, href }: ProgramCardProp
             transition={{ duration: 0.6, delay: index * 0.2 + 0.4 }}
           >
             <ArrowRight className="h-4 w-4" />
-            Learn More
+            <span className="text-sm lg:text-lg">Learn More</span>
           </motion.div>
         </div>
       </motion.div>
@@ -123,7 +123,7 @@ export default function ProgramsSection() {
 
   return (
     <section id="our-sevas" className="section-padding bg-white">
-      <div className="container-max">
+      <div className="px-4 lg:container-max">
         <motion.div
           ref={ref}
           className="text-center mb-16"
@@ -141,7 +141,7 @@ export default function ProgramsSection() {
           </motion.p>
 
           <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+            className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
@@ -150,7 +150,7 @@ export default function ProgramsSection() {
           </motion.h2>
 
           <motion.p
-            className="text-gray-600 text-lg max-w-3xl mx-auto"
+            className="text-gray-600 text-[15px] lg:text-lg max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
@@ -160,7 +160,7 @@ export default function ProgramsSection() {
           </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 ">
           {programs.map((program, index) => (
             <ProgramCard key={index} {...program} index={index} />
           ))}
@@ -174,12 +174,12 @@ export default function ProgramsSection() {
         >
           <Link href="/donate">
             <motion.button
-              className="bg-red-500 text-white px-8 py-4 rounded-md font-semibold hover:bg-red-600 transition-colors duration-200 inline-flex items-center gap-2"
+              className="bg-red-500 text-white px-8 py-4 font-semibold hover:bg-red-600 transition-colors duration-200 inline-flex items-center gap-2 rounded-full"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <ArrowRight className="h-5 w-5" />
-              Support All Sevas
+              <span className="">Support All Sevas</span>
             </motion.button>
           </Link>
         </motion.div>

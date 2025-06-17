@@ -19,7 +19,7 @@ export default function AboutSection() {
 
   return (
     <section className="section-padding bg-white">
-      <div className="container-max">
+      <div className="px-4 lg:container-max">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Images Section */}
           <motion.div
@@ -32,7 +32,7 @@ export default function AboutSection() {
             <div className="grid grid-cols-2 gap-6">
               {/* Main large video */}
               <motion.div
-                className="col-span-2 relative h-[400px] rounded-3xl overflow-hidden shadow-xl interactive-image group"
+                className="col-span-2 relative h-[200px] sm:h-[300px] lg:h-[400px] rounded-3xl overflow-hidden shadow-xl interactive-image group"
                 whileHover={{ scale: 1.02, y: -5 }}
                 transition={{ duration: 0.3 }}
               >
@@ -64,7 +64,7 @@ export default function AboutSection() {
 
               {/* Two smaller images */}
               <motion.div
-                className="relative h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
+                className="col-span-2 md:col-span-1 relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 transition={{ duration: 0.3 }}
               >
@@ -78,7 +78,7 @@ export default function AboutSection() {
               </motion.div>
 
               <motion.div
-                className="relative h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
+                className="col-span-2 md:col-span-1 relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
                 whileHover={{ scale: 1.05, rotate: -1 }}
                 transition={{ duration: 0.3 }}
               >
@@ -109,7 +109,7 @@ export default function AboutSection() {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
                 Bringing Hope Through <span className="gradient-text">Community Service</span>
               </h2>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+              <p className="text-gray-600 text-sm lg:text-lg leading-relaxed mb-8">
                 Since 2000 Sarthi Foundation is dedicated to serving underprivileged communities through comprehensive support
                 programs. We focus on addressing basic needs like food security, supporting vulnerable groups like
                 widows, and providing seasonal assistance to ensure dignity and comfort for all.
@@ -131,10 +131,10 @@ export default function AboutSection() {
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
                 >
-                  <div className="w-6 h-6 bg-primary-red rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                    <Check className="h-4 w-4 text-white" />
+                  <div className="w-5 h-5 lg:w-6 lg:h-6 bg-primary-red rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="h-3 w-3 lg:h-4 lg:w-4 text-white" />
                   </div>
-                  <p className="text-gray-700 leading-relaxed">{feature}</p>
+                  <p className="text-gray-700 leading-relaxed text-sm lg:text-lg">{feature}</p>
                 </motion.div>
               ))}
             </motion.div>
@@ -146,12 +146,12 @@ export default function AboutSection() {
               transition={{ duration: 0.6, delay: 1.0 }}
             >
               <motion.button
-                className="bg-primary-red text-white px-8 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
+                className="bg-primary-red text-white px-4 py-2 lg:px-8 lg:py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <ArrowRight className="h-5 w-5" />
-                Support Our Mission
+                <span className="text-[16px] lg:text-lg">Support Our Mission</span>
               </motion.button>
             </motion.div>
           </motion.div>

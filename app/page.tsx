@@ -10,7 +10,7 @@ import CallToActionSection from "@/components/call-to-action-section"
 
 export default function Home() {
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden mt-5 md:mt-0">
       <HeroSection />
       <StatsSection />
       <AboutSection />
