@@ -119,6 +119,14 @@ export default function ProgramsSection() {
       image: "/images/educational-support-children.jpg",
       href: "/media/educational-support",
     },
+    {
+      title: "Uttarayan Celebration",
+      description:
+        "We celebrate Uttarayan with children by sharing traditional treats like undhiyu, jalebi, and chikki, bringing joy, culture, and festive spirit to their lives.",
+      image: "/images/Uttrayan.jpg",
+      href: "/media/uttarayan-celebration",
+    }
+
   ]
 
   return (

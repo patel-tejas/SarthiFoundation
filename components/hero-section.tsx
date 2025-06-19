@@ -168,9 +168,9 @@ function AnimatedNumber({ target, duration = 2000, suffix = "", prefix = "" }: A
 
 export default function HeroSection() {
   return (
-    <section className="bg-white min-h-screen flex items-center pt-20 md:pt-0">
-      <div className="px-5 md:container-max">
-        <div className="grid lg:grid-cols-2 gap-10 items-center">
+    <section className="bg-white min-h-screen flex items-center pt-20 md:pt-25 w-full justify-center">
+      <div className="md:container-max">
+        <div className="grid lg:grid-cols-2 justify-between gap-10 lg:gap-20 items-center w-full">
           {/* Left Content */}
           <motion.div
             className="space-y-8"

@@ -18,7 +18,7 @@ export default function AboutSection() {
   ]
 
   return (
-    <section className="section-padding bg-white">
+    <section className=" bg-white py-20 px-10">
       <div className="px-4 lg:container-max">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Images Section */}
@@ -64,7 +64,7 @@ export default function AboutSection() {
 
               {/* Two smaller images */}
               <motion.div
-                className="col-span-2 md:col-span-1 relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
+                className="col-span-2 md:col-span-1 relative h-[220px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
                 whileHover={{ scale: 1.05, rotate: 1 }}
                 transition={{ duration: 0.3 }}
               >
@@ -78,7 +78,7 @@ export default function AboutSection() {
               </motion.div>
 
               <motion.div
-                className="col-span-2 md:col-span-1 relative h-[150px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
+                className="col-span-2 md:col-span-1 relative h-[220px] md:h-[200px] rounded-2xl overflow-hidden shadow-lg interactive-image"
                 whileHover={{ scale: 1.05, rotate: -1 }}
                 transition={{ duration: 0.3 }}
               >
